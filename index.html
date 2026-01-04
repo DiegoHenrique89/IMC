@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC Grátis | Calcule Seu Índice de Massa Corporal Online</title>
+    <meta name="description" content="Calculadora de IMC online e gratuita. Calcule seu Índice de Massa Corporal instantaneamente com idade, peso e altura. Veja sua classificação e tabela completa do IMC.">
+    <meta name="keywords" content="calcular IMC, índice de massa corporal, calculadora imc online, imc grátis, tabela imc, peso ideal, saúde, calculadora saúde">
+    <meta name="author" content="Calculadora de IMC">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Calculadora de IMC Grátis | Calcule Seu Índice de Massa Corporal">
+    <meta property="og:description" content="Calcule seu IMC online e gratuito. Descubra sua classificação de peso com base no Índice de Massa Corporal.">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Calculadora de IMC Grátis | Calcule Seu Índice de Massa Corporal">
+    <meta name="twitter:description" content="Calcule seu IMC online e gratuito. Descubra sua classificação de peso com base no Índice de Massa Corporal.">
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculadora de IMC Online",
+      "description": "Calculadora gratuita de Índice de Massa Corporal (IMC) para verificar sua classificação de peso",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "BRL"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Calculadora de IMC"
+      }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7ff;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header com espaço para anúncio */
+        .header-ad-container {
+            width: 100%;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .ad-top {
+            width: 728px;
+            height: 90px;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #4a6fa5;
+            color: #777;
+            font-size: 14px;
+            margin: 0 auto;
+        }
+        
+        .ad-top.mobile {
+            display: none;
+            width: 320px;
+            height: 100px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+        
+        header {
+            background: linear-gradient(to right, #4a6fa5, #6a93cb);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        
+        .input-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            background-color: #f9fbff;
+            border-radius: 10px 0 0 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .result-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a6fa5;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px 14px 14px 45px;
+            border: 2px solid #d0e0f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            border-color: #4a6fa5;
+            outline: none;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4a6fa5;
+        }
+        
+        .unit {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(to right, #4a6fa5, #6a93cb);
+            color: white;
+            border: none;
+            padding: 16px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .calculate-btn:hover {
+            background: linear-gradient(to right, #3a5f95, #5a83bb);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 150, 0.2);
+        }
+        
+        .result-container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f0f7ff;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .bmi-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #4a6fa5;
+            margin: 10px 0;
+        }
+        
+        .bmi-category {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding: 8px 20px;
+            border-radius: 30px;
+        }
+        
+        .info-box {
+            background-color: #e6f0ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            border-left: 4px solid #4a6fa5;
+        }
+        
+        .bmi-table {
+            width: 100%;
+            margin-top: 25px;
+            border-collapse: collapse;
+        }
+        
+        .bmi-table th, .bmi-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .bmi-table th {
+            background-color: #f0f7ff;
+            color: #4a6fa5;
+        }
+        
+        .highlight {
+            background-color: #e6f0ff;
+            font-weight: 600;
+        }
+        
+        .category-abaixo {
+            color: #ff9800;
+            background-color: #fff3e0;
+        }
+        
+        .category-normal {
+            color: #4caf50;
+            background-color: #e8f5e9;
+        }
+        
+        .category-sobrepeso {
+            color: #ff9800;
+            background-color: #fff3e0;
+        }
+        
+        .category-obesidade1 {
+            color: #ff5722;
+            background-color: #ffebee;
+        }
+        
+        .category-obesidade2 {
+            color: #d32f2f;
+            background-color: #ffebee;
+        }
+        
+        .category-obesidade3 {
+            color: #b71c1c;
+            background-color: #ffebee;
+        }
+        
+        /* Rodapé com espaço para anúncio */
+        .footer-ad-container {
+            width: 100%;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            border-top: 1px solid #eaeaea;
+            margin-top: 30px;
+        }
+        
+        .ad-bottom {
+            width: 728px;
+            height: 90px;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #4a6fa5;
+            color: #777;
+            font-size: 14px;
+            margin: 0 auto;
+        }
+        
+        .ad-bottom.mobile {
+            display: none;
+            width: 320px;
+            height: 100px;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+            padding: 0 15px;
+        }
+        
+        .footer-section h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .footer-section a {
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            width: 100%;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #95a5a6;
+        }
+        
+        .age-info {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* Conteúdo informativo para SEO */
+        .seo-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .seo-content h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .seo-content h3 {
+            color: #3498db;
+            margin: 25px 0 15px 0;
+            font-size: 1.4rem;
+        }
+        
+        .seo-content p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .seo-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .seo-content li {
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .input-section, .result-section {
+                width: 100%;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+            
+            .ad-top, .ad-bottom {
+                display: none;
+            }
+            
+            .ad-top.mobile, .ad-bottom.mobile {
+                display: flex;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-section {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .input-section, .result-section {
+                padding: 20px;
+            }
+            
+            .bmi-value {
+                font-size: 2.8rem;
+            }
+            
+            .seo-content {
+                padding: 20px;
+            }
+        }
+        
+        /* Animações para melhor UX */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result-container {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Breadcrumb para SEO */
+        .breadcrumb {
+            padding: 10px 0;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb span {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        /* Botão de compartilhamento */
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .share-btn {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.3s;
+        }
+        
+        .share-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .share-btn.facebook {
+            color: #1877F2;
+        }
+        
+        .share-btn.twitter {
+            color: #1DA1F2;
+        }
+        
+        .share-btn.whatsapp {
+            color: #25D366;
+        }
+    </style>
+</head>
+<body>
+    <!-- Anúncio Topo (Desktop) -->
+    <div class="header-ad-container">
+        <div class="ad-top" id="ad-top-desktop">
+            <!-- Espaço para Google AdSense 728x90 -->
+            <span><i class="fas fa-ad"></i> Espaço para Anúncio (728x90)</span>
+        </div>
+        <div class="ad-top mobile" id="ad-top-mobile">
+            <!-- Espaço para Google AdSense 320x100 (Mobile) -->
+            <span><i class="fas fa-ad"></i> Anúncio (320x100)</span>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Breadcrumb para SEO -->
+        <div class="breadcrumb">
+            <a href="/">Home</a> &gt; 
+            <a href="/calculadora">Calculadora</a> &gt; 
+            <span>Calcular IMC</span>
+        </div>
+        
+        <header>
+            <h1><i class="fas fa-weight-scale"></i> Calculadora de IMC Online Grátis</h1>
+            <p class="subtitle">Calcule seu Índice de Massa Corporal (IMC) instantaneamente. Descubra sua classificação e veja dicas para uma vida mais saudável.</p>
+        </header>
+        
+        <div class="content">
+            <div class="input-section">
+                <h2><i class="fas fa-info-circle"></i> Calcule seu IMC Agora</h2>
+                <p style="margin-top: 10px; margin-bottom: 25px; color: #666;">Preencha seus dados para calcular seu Índice de Massa Corporal:</p>
+                
+                <div class="form-group">
+                    <label for="age">Idade</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="number" id="age" min="1" max="120" placeholder="Digite sua idade">
+                        <span class="unit">anos</span>
+                    </div>
+                    <p class="age-info">A idade não altera o cálculo do IMC, mas nos ajuda a contextualizar o resultado.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="weight">Peso</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-weight input-icon"></i>
+                        <input type="number" id="weight" min="1" max="300" step="0.1" placeholder="Digite seu peso">
+                        <span class="unit">kg</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="height">Altura</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-ruler-vertical input-icon"></i>
+                        <input type="number" id="height" min="0.5" max="2.5" step="0.01" placeholder="Digite sua altura">
+                        <span class="unit">metros</span>
+                    </div>
+                </div>
+                
+                <button class="calculate-btn" id="calculate">
+                    <i class="fas fa-calculator"></i> Calcular IMC Agora
+                </button>
+                
+                <div class="info-box">
+                    <p><strong>Fórmula do IMC:</strong> IMC = peso (kg) / altura² (m). Esta calculadora segue os padrões da Organização Mundial da Saúde (OMS).</p>
+                </div>
+                
+                <!-- Botões de compartilhamento -->
+                <div class="share-buttons">
+                    <button class="share-btn facebook" id="share-facebook">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </button>
+                    <button class="share-btn twitter" id="share-twitter">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </button>
+                    <button class="share-btn whatsapp" id="share-whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                </div>
+            </div>
+            
+            <div class="result-section">
+                <h2><i class="fas fa-chart-line"></i> Seu Resultado de IMC</h2>
+                <p style="margin-top: 10px; margin-bottom: 25px; color: #666;">Veja aqui sua classificação de acordo com o IMC:</p>
+                
+                <div class="result-container">
+                    <p style="color: #666;">Seu Índice de Massa Corporal é:</p>
+                    <div class="bmi-value" id="bmi-value">--.--</div>
+                    <div class="bmi-category" id="bmi-category">Informe seus dados acima</div>
+                    
+                    <table class="bmi-table">
+                        <thead>
+                            <tr>
+                                <th>Classificação do IMC</th>
+                                <th>Valor do IMC</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Abaixo do peso</td>
+                                <td>Menor que 18.5</td>
+                            </tr>
+                            <tr>
+                                <td>Peso normal</td>
+                                <td>18.5 – 24.9</td>
+                            </tr>
+                            <tr>
+                                <td>Sobrepeso</td>
+                                <td>25 – 29.9</td>
+                            </tr>
+                            <tr>
+                                <td>Obesidade Grau I</td>
+                                <td>30 – 34.9</td>
+                            </tr>
+                            <tr>
+                                <td>Obesidade Grau II</td>
+                                <td>35 – 39.9</td>
+                            </tr>
+                            <tr>
+                                <td>Obesidade Grau III</td>
+                                <td>Maior que 40</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="info-box" style="margin-top: 20px;">
+                    <p><strong>Dica:</strong> O IMC é uma ferramenta de triagem, não um diagnóstico. Consulte um profissional de saúde para uma avaliação completa.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Conteúdo SEO Otimizado -->
+        <div class="seo-content">
+            <h2>Calculadora de IMC: Tudo o que você precisa saber</h2>
+            <p>O Índice de Massa Corporal (IMC) é uma medida internacional usada para calcular se uma pessoa está no peso ideal. Desenvolvido pelo polímata Lambert Quételet no século XIX, o IMC é um método fácil e rápido para a avaliação do nível de gordura de cada pessoa, sendo, por isso, um preditor internacional de obesidade adotado pela Organização Mundial da Saúde (OMS).</p>
+            
+            <h3>Como interpretar seu resultado de IMC?</h3>
+            <p>O resultado do IMC deve ser interpretado de acordo com os valores de referência estabelecidos pela OMS. No entanto, é importante lembrar que o IMC não leva em consideração a composição corporal. Portanto, pessoas com muita massa muscular podem ter um IMC alto sem necessariamente ter excesso de gordura.</p>
+            
+            <h3>Limitações do IMC</h3>
+            <ul>
+                <li><strong>Não diferencia massa muscular de massa gorda:</strong> Atletas e pessoas musculosas podem ter IMC elevado sem serem obesas.</li>
+                <li><strong>Não considera a distribuição de gordura corporal:</strong> Gordura abdominal é mais perigosa para saúde.</li>
+                <li><strong>Pode não ser preciso para certos grupos:</strong> Idosos, gestantes, crianças e atletas precisam de avaliações específicas.</li>
+                <li><strong>Não leva em conta fatores como densidade óssea:</strong> Pessoas com ossos mais densos podem ter IMC mais alto.</li>
+            </ul>
+            
+            <h3>Dicas para manter um IMC saudável</h3>
+            <p>Manter um IMC dentro da faixa considerada saudável (entre 18.5 e 24.9) é importante para reduzir o risco de diversas doenças como diabetes, hipertensão e problemas cardíacos. Algumas dicas para alcançar e manter um peso saudável incluem:</p>
+            <ul>
+                <li><strong>Pratique atividades físicas regularmente:</strong> Pelo menos 150 minutos de exercícios moderados por semana.</li>
+                <li><strong>Adote uma alimentação balanceada:</strong> Rica em frutas, verduras, legumes e proteínas magras.</li>
+                <li><strong>Beba água regularmente:</strong> Pelo menos 2 litros de água por dia.</li>
+                <li><strong>Evite alimentos ultraprocessados:</strong> Reduza o consumo de açúcares, sal e gorduras saturadas.</li>
+                <li><strong>Consulte regularmente um profissional de saúde:</strong> Para acompanhamento e orientação personalizada.</li>
+            </ul>
+            
+            <h3>IMC por faixa etária</h3>
+            <p>Embora o cálculo do IMC seja o mesmo para todos os adultos, a interpretação pode variar conforme a idade. Idosos, por exemplo, podem ter um IMC ligeiramente superior ao considerado ideal para adultos mais jovens, devido à perda natural de massa muscular com o envelhecimento. Já para crianças e adolescentes, o IMC é avaliado através de gráficos de crescimento específicos.</p>
+            
+            <p><strong>Nota importante:</strong> Esta calculadora de IMC online fornece uma estimativa com base nos dados fornecidos. Para uma avaliação completa da sua saúde, consulte um médico ou nutricionista. Nunca inicie dietas restritivas sem orientação profissional.</p>
+        </div>
+        
+        <!-- Anúncio Rodapé (Desktop) -->
+        <div class="footer-ad-container">
+            <div class="ad-bottom" id="ad-bottom-desktop">
+                <!-- Espaço para Google AdSense 728x90 -->
+                <span><i class="fas fa-ad"></i> Espaço para Anúncio (728x90)</span>
+            </div>
+            <div class="ad-bottom mobile" id="ad-bottom-mobile">
+                <!-- Espaço para Google AdSense 320x100 (Mobile) -->
+                <span><i class="fas fa-ad"></i> Anúncio (320x100)</span>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sobre a Calculadora de IMC</h3>
+                <p>Nossa calculadora de IMC online é gratuita e precisa, seguindo os padrões da Organização Mundial da Saúde. Calcule seu Índice de Massa Corporal em segundos.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <p><a href="/tabela-imc">Tabela de IMC Completa</a></p>
+                <p><a href="/como-calcular">Como Calcular o IMC</a></p>
+                <p><a href="/faq">Perguntas Frequentes</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Informações Legais</h3>
+                <p><a href="/privacidade">Política de Privacidade</a></p>
+                <p><a href="/termos">Termos de Uso</a></p>
+                <p><a href="/contato">Contato</a></p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; <span id="current-year">2023</span> Calculadora de IMC Online. Todos os direitos reservados. | Este site não fornece aconselhamento médico. Consulte um profissional de saúde para avaliações personalizadas.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Conteúdo otimizado para SEO | Compatível com Google AdSense | Anúncios apenas no topo e rodapé</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configuração inicial
+            const calculateBtn = document.getElementById('calculate');
+            const ageInput = document.getElementById('age');
+            const weightInput = document.getElementById('weight');
+            const heightInput = document.getElementById('height');
+            const bmiValue = document.getElementById('bmi-value');
+            const bmiCategory = document.getElementById('bmi-category');
+            const currentYear = document.getElementById('current-year');
+            
+            // Atualizar ano atual no rodapé
+            currentYear.textContent = new Date().getFullYear();
+            
+            // Configurar valores padrão para demonstração
+            ageInput.value = localStorage.getItem('imc_age') || 30;
+            weightInput.value = localStorage.getItem('imc_weight') || 70;
+            heightInput.value = localStorage.getItem('imc_height') || 1.75;
+            
+            // Calcular IMC automaticamente se houver valores salvos
+            if (localStorage.getItem('imc_weight') && localStorage.getItem('imc_height')) {
+                calculateBMI();
+            }
+            
+            // Adicionar evento de cálculo
+            calculateBtn.addEventListener('click', calculateBMI);
+            
+            // Permitir cálculo ao pressionar Enter em qualquer campo
+            [ageInput, weightInput, heightInput].forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        calculateBMI();
+                    }
+                });
+                
+                // Salvar valores no localStorage
+                input.addEventListener('change', function() {
+                    localStorage.setItem(`imc_${this.id}`, this.value);
+                });
+            });
+            
+            // Configurar botões de compartilhamento
+            document.getElementById('share-facebook').addEventListener('click', shareOnFacebook);
+            document.getElementById('share-twitter').addEventListener('click', shareOnTwitter);
+            document.getElementById('share-whatsapp').addEventListener('click', shareOnWhatsApp);
+            
+            function calculateBMI() {
+                // Obter valores dos inputs
+                const age = parseFloat(ageInput.value);
+                const weight = parseFloat(weightInput.value);
+                const height = parseFloat(heightInput.value);
+                
+                // Validação dos dados
+                if (!weight || weight <= 0) {
+                    showError("Por favor, insira um peso válido (maior que 0).");
+                    weightInput.focus();
+                    return;
+                }
+                
+                if (!height || height <= 0.5 || height > 2.5) {
+                    showError("Por favor, insira uma altura válida (entre 0.5 e 2.5 metros).");
+                    heightInput.focus();
+                    return;
+                }
+                
+                // Salvar dados no localStorage
+                localStorage.setItem('imc_age', age);
+                localStorage.setItem('imc_weight', weight);
+                localStorage.setItem('imc_height', height);
+                
+                // Calcular IMC (peso / altura²)
+                const bmi = weight / (height * height);
+                
+                // Exibir resultado formatado
+                bmiValue.textContent = bmi.toFixed(2);
+                
+                // Determinar categoria do IMC
+                let category = "";
+                let categoryClass = "";
+                
+                if (bmi < 18.5) {
+                    category = "Abaixo do peso";
+                    categoryClass = "category-abaixo";
+                } else if (bmi >= 18.5 && bmi < 25) {
+                    category = "Peso normal";
+                    categoryClass = "category-normal";
+                } else if (bmi >= 25 && bmi < 30) {
+                    category = "Sobrepeso";
+                    categoryClass = "category-sobrepeso";
+                } else if (bmi >= 30 && bmi < 35) {
+                    category = "Obesidade Grau I";
+                    categoryClass = "category-obesidade1";
+                } else if (bmi >= 35 && bmi < 40) {
+                    category = "Obesidade Grau II";
+                    categoryClass = "category-obesidade2";
+                } else {
+                    category = "Obesidade Grau III";
+                    categoryClass = "category-obesidade3";
+                }
+                
+                // Adicionar informação de idade, se fornecida
+                if (age && age > 0) {
+                    let ageMessage = "";
+                    
+                    if (age < 18) {
+                        ageMessage = " (Para menores de 18 anos, consulte um pediatra para interpretação adequada)";
+                    } else if (age >= 18 && age < 60) {
+                        ageMessage = " (Para adultos, mantenha hábitos saudáveis)";
+                    } else {
+                        ageMessage = " (Para idosos, outros fatores como composição corporal são importantes)";
+                    }
+                    
+                    category += ageMessage;
+                }
+                
+                // Aplicar categoria ao elemento
+                bmiCategory.textContent = category;
+                bmiCategory.className = `bmi-category ${categoryClass}`;
+                
+                // Destacar a linha correta na tabela
+                highlightTableRow(bmi);
+                
+                // Rolagem suave para o resultado
+                document.querySelector('.result-container').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'nearest'
+                });
+            }
+            
+            function highlightTableRow(bmi) {
+                // Remover destaque anterior
+                document.querySelectorAll('.bmi-table tr').forEach(row => {
+                    row.classList.remove('highlight');
+                });
+                
+                // Destacar a linha correspondente ao IMC calculado
+                const rows = document.querySelectorAll('.bmi-table tbody tr');
+                
+                if (bmi < 18.5) {
+                    rows[0].classList.add('highlight');
+                } else if (bmi >= 18.5 && bmi < 25) {
+                    rows[1].classList.add('highlight');
+                } else if (bmi >= 25 && bmi < 30) {
+                    rows[2].classList.add('highlight');
+                } else if (bmi >= 30 && bmi < 35) {
+                    rows[3].classList.add('highlight');
+                } else if (bmi >= 35 && bmi < 40) {
+                    rows[4].classList.add('highlight');
+                } else {
+                    rows[5].classList.add('highlight');
+                }
+            }
+            
+            function showError(message) {
+                bmiValue.textContent = "--.--";
+                bmiCategory.textContent = message;
+                bmiCategory.className = "bmi-category category-abaixo";
+                
+                // Remover destaque da tabela
+                document.querySelectorAll('.bmi-table tr').forEach(row => {
+                    row.classList.remove('highlight');
+                });
+            }
+            
+            // Funções de compartilhamento
+            function shareOnFacebook() {
+                const url = encodeURIComponent(window.location.href);
+                const text = encodeURIComponent("Calculei meu IMC usando esta calculadora online grátis!");
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+            }
+            
+            function shareOnTwitter() {
+                const url = encodeURIComponent(window.location.href);
+                const text = encodeURIComponent("Calculadora de IMC online e gratuita! Calcule seu Índice de Massa Corporal agora.");
+                window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+            }
+            
+            function shareOnWhatsApp() {
+                const url = encodeURIComponent(window.location.href);
+                const text = encodeURIComponent("Olá, veja esta calculadora de IMC online gratuita: ");
+                window.open(`https://wa.me/?text=${text}${url}`, '_blank');
+            }
+            
+            // Inicializar tooltips para melhor UX
+            initializeTooltips();
+            
+            function initializeTooltips() {
+                // Adicionar título descritivo aos inputs
+                ageInput.title = "Sua idade em anos completos";
+                weightInput.title = "Seu peso em quilogramas (ex: 70.5)";
+                heightInput.title = "Sua altura em metros (ex: 1.75)";
+            }
+            
+            // Análise de uso simples
+            window.addEventListener('load', function() {
+                console.log('Calculadora de IMC carregada com sucesso.');
+                console.log('Anúncios configurados apenas no topo e rodapé, conforme políticas do Google AdSense.');
+            });
+            
+            // Atualizar dinamicamente os anúncios para dispositivos móveis
+            function updateAdDisplay() {
+                const isMobile = window.innerWidth <= 768;
+                const desktopTopAd = document.getElementById('ad-top-desktop');
+                const mobileTopAd = document.getElementById('ad-top-mobile');
+                const desktopBottomAd = document.getElementById('ad-bottom-desktop');
+                const mobileBottomAd = document.getElementById('ad-bottom-mobile');
+                
+                if (isMobile) {
+                    desktopTopAd.style.display = 'none';
+                    mobileTopAd.style.display = 'flex';
+                    desktopBottomAd.style.display = 'none';
+                    mobileBottomAd.style.display = 'flex';
+                } else {
+                    desktopTopAd.style.display = 'flex';
+                    mobileTopAd.style.display = 'none';
+                    desktopBottomAd.style.display = 'flex';
+                    mobileBottomAd.style.display = 'none';
+                }
+            }
+            
+            // Verificar tamanho da tela ao carregar e redimensionar
+            updateAdDisplay();
+            window.addEventListener('resize', updateAdDisplay);
+        });
+    </script>
+</body>
+</html>
